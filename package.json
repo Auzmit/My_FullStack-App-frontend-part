@@ -1,0 +1,19 @@
+{
+  "name": "my_fullstack-app-frontend-part",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "my_fullstack-app-frontend-part": "./bin/index.js"
+  },
+  "dependencies": {
+    "axios": "*",
+    "lodash": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
