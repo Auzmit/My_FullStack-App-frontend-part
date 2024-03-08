@@ -1,6 +1,9 @@
 const form = document.getElementById('form_search');
+const input = document.getElementById('form_input');
 const button = document.getElementById('btn_search');
 const result = document.querySelector('#result');
+
+input.focus();
 
 button.addEventListener('click', async (e) => {
   e.preventDefault();
@@ -24,6 +27,8 @@ button.addEventListener('click', async (e) => {
       const error = document.createElement('p');
       error.textContent = 'Пользователи не найдены';
       result.replaceChildren(error);
-    }
+    };
+    
+    input.focus();
     });
 });
