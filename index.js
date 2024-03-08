@@ -13,7 +13,7 @@ button.addEventListener('click', async (e) => {
     .then(async (collection) => {
       const elements = collection.data.map((person) => {
         const li = document.createElement('li');
-        li.textContent = person.name;
+        li.textContent = `${person.name} | ${person.phone}`;
         return li;
       });
     if (elements.length) {
