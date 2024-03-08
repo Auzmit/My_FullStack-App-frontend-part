@@ -1,20 +1,23 @@
-// @ts-check
+const form = document.querySelector('form');
+const button = document.querySelector('button');
+const result = document.querySelector('#result');
 
-import fs from 'fs/promises';
-import _ from 'lodash';
+button.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const value = new FormData(form);
+  const name = value.get('name');
+  const endPoint = 'http://localhost:8080/search.json?q=';
 
-import makeServer from './server.js';
-
-export default async (port, callback = () => {}) => {
-  const data = await fs.readFile('phonebook.txt');
-  const users = data.toString()
-    .trim()
-    .split('\n')
-    .map((value) => value.split('|').map((item) => item.trim()));
-  const usersIds = users.map(([id]) => id);
-  const usersData = users.map(([, name, phone]) => ({ name, phone }));
-  const usersById = _.zipObject(usersIds, usersData);
-
-  const server = makeServer(usersById);
-  server.listen(port, callback.bind(null, server));
-};
+  fetch(`${endPoint}${name}`)
+    .then((response) => response.json())
+    .then(async (collection) => {
+      const elements = collection.data.map((person) => {
+        const li = document.createElement('li');
+        li.textContent = person.name;
+        return li;
+      });
+    const ol = await document.createElement('ol');
+    ol.append(...elements);
+    result.replaceChildren(ol);
+    });
+});
