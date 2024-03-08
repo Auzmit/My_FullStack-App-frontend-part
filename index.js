@@ -1,5 +1,5 @@
-const form = document.querySelector('form');
-const button = document.querySelector('button');
+const form = document.getElementById('form_search');
+const button = document.getElementById('btn_search');
 const result = document.querySelector('#result');
 
 button.addEventListener('click', async (e) => {
@@ -16,8 +16,14 @@ button.addEventListener('click', async (e) => {
         li.textContent = person.name;
         return li;
       });
-    const ol = await document.createElement('ol');
-    ol.append(...elements);
-    result.replaceChildren(ol);
+    if (elements.length) {
+      const ol = await document.createElement('ol');
+      ol.append(...elements);
+      result.replaceChildren(ol);
+    } else {
+      const error = document.createElement('p');
+      error.textContent = 'Пользователи не найдены';
+      result.replaceChildren(error);
+    }
     });
 });
